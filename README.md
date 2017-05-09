@@ -26,10 +26,7 @@ var busControl = Bus.Factory.CreateUsingRabbitMq(cfg =>
                 });
 
                 cfg.ReceiveEndpoint(host, queueName, ec =>
-                {                                        
-                    ec.UseRetry(retryInterval != 0
-                        ? Retry.Interval(retryCount, retryInterval)
-                        : Retry.Immediate(retryCount));
+                {                                                            
                     ec.PrefetchCount = prefetchCount;
                     ec.AutoDelete = autoDeleteQueue;
                     ec.PurgeOnStartup = purgeOnStartup;
