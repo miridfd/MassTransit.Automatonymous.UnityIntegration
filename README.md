@@ -3,7 +3,7 @@ Container for Registering Automatonymous.SagaStateMachine&lt;TSaga> using Unity
 
 The functionality is currently minimal, you are welcome to add your code.
 
-# Usage ex.
+# Usage e.g.
 using MassTransit;
 
 using MassTransit.Automatonymous.UnityIntegration;
