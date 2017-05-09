@@ -17,9 +17,7 @@ namespace MassTransit.Automatonymous.UnityIntegration
         /// <param name="container"></param>
         /// <param name="name"></param>
         public static void LoadStateMachineSagas(this IReceiveEndpointConfigurator configurator, IUnityContainer container, string name = "message")
-        {
-            //var scope = context.Container.Resolve<IUnityContainer>();
-
+        {           
             IList<Type> sagaTypes = FindStateMachineSagaTypes(container);
 
             foreach (var sagaType in sagaTypes)
@@ -30,14 +28,11 @@ namespace MassTransit.Automatonymous.UnityIntegration
 
         public static IList<Type> FindStateMachineSagaTypes(IUnityContainer container)
         {
-            Type type = typeof(SagaStateMachine<>);
-            bool hasInterface = type.HasInterface(typeof(StateMachine));
-
-            return container.Registrations                
-                .Where(r => r.MappedToType.HasInterface(typeof(SagaStateMachine<>)))
-                .Select(rs => rs.MappedToType.GetClosingArguments(typeof(SagaStateMachine<>)).Single())
-                .Distinct()
-                .ToList();
+            return container.Registrations
+            .Where(r => r.MappedToType.HasInterface(typeof(SagaStateMachine<>)))
+            .Select(rs => rs.MappedToType.GetClosingArguments(typeof(SagaStateMachine<>)).Single())
+            .Distinct()
+            .ToList();
         }
     }
 }
